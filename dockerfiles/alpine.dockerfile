@@ -1,6 +1,7 @@
 ARG ALPINE_VERSION
 FROM alpine:${ALPINE_VERSION} AS builder
 
+# trunk-ignore(hadolint/DL3018)
 RUN set -eux; \
     apk add --no-cache \
     build-base cmake bash autoconf automake pkgconf \
@@ -13,6 +14,7 @@ RUN set -eux; \
 
 ADD https://github.com/intel/hyperscan/archive/refs/tags/v5.4.0.tar.gz /tmp/hyperscan.tar.gz
 
+# trunk-ignore(hadolint/DL3003)
 RUN set -eux; \
     if [ "$(uname -m)" = 'x86_64*' ] || [ "$(uname -m)" = 'i*86' ]; then \
     mkdir -p /tmp/hyperscan_src/build; \
@@ -27,6 +29,7 @@ RUN set -eux; \
 
 ADD https://github.com/snort3/libdaq/archive/refs/tags/v3.0.9.tar.gz /tmp/libdaq.tar.gz
 
+# trunk-ignore(hadolint/DL3003)
 RUN set -eux; \
     mkdir -p /tmp/libdaq_src ; \
     tar -xvzf /tmp/libdaq.tar.gz --strip-components=1 -C /tmp/libdaq_src ; \
@@ -40,6 +43,7 @@ RUN set -eux; \
 
 ADD https://github.com/ofalk/libdnet/archive/refs/tags/libdnet-1.16.1.tar.gz /tmp/libdnet.tar.gz
 
+# trunk-ignore(hadolint/DL3003)
 RUN set -eux; \
     mkdir -p /tmp/libdnet_src ; \
     tar -xvzf /tmp/libdnet.tar.gz --strip-components=1 -C /tmp/libdnet_src ; \
@@ -52,6 +56,7 @@ RUN set -eux; \
 
 ADD https://github.com/rurban/safeclib/releases/download/v3.7.1/safeclib-3.7.1.tar.gz /tmp/libsafec.tar.gz
 
+# trunk-ignore(hadolint/DL3003)
 RUN set -eux; \
     mkdir -p /tmp/libsafec_src ; \
     tar -xvzf /tmp/libsafec.tar.gz --strip-components=1 -C /tmp/libsafec_src ; \
@@ -64,6 +69,7 @@ RUN set -eux; \
 
 ADD https://github.com/jemalloc/jemalloc/releases/download/5.3.0/jemalloc-5.3.0.tar.bz2 /tmp/jemalloc.tar.bz2
 
+# trunk-ignore(hadolint/DL3003)
 RUN set -eux; \
     mkdir -p /tmp/jemalloc_src ; \
     tar -xvjf /tmp/jemalloc.tar.bz2 --strip-components=1 -C /tmp/jemalloc_src ; \
@@ -76,6 +82,7 @@ RUN set -eux; \
 
 ADD https://github.com/snort3/snort3/archive/refs/tags/3.1.39.0.tar.gz /tmp/snort.tar.gz
 
+# trunk-ignore(hadolint/DL3003)
 RUN set -eux; \
     mkdir -p /tmp/snort_src ; \
     tar -xvzf /tmp/snort.tar.gz --strip-components=1 -C /tmp/snort_src ; \
@@ -98,6 +105,7 @@ RUN set -eux; \
 
 FROM alpine:${ALPINE_VERSION}
 
+# trunk-ignore(hadolint/DL3018)
 RUN set -eux; \
     apk add --no-cache \
     libpcap pcre \
