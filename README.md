@@ -19,6 +19,6 @@ docker build -t snort3-base -f dockerfiles/debian.dockerfile .
 ## Usage
 This is simple usage to check the Snort version
 ```bash
-docker run --rm -it mfscy/snort-base:3 snort -v
+docker run --rm -it snort3-base snort -v
 ```
 
