@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=3
+ARG ALPINE_VERSION=3.17
 
 FROM alpine:${ALPINE_VERSION} AS builder
 
@@ -138,5 +138,7 @@ RUN set -eux; \
     touch /usr/local/etc/lists/default.blocklist ; \
     # download community rules
     pulledpork.py -c /usr/local/etc/pulledpork/pulledpork.conf
+
+USER snort
 
 CMD [ "/usr/local/bin/snort", "-T", "-c", "/usr/local/etc/snort/snort.lua" ]

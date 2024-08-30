@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=11
+ARG DEBIAN_VERSION=11-slim
 
 FROM debian:${DEBIAN_VERSION} AS builder
 
@@ -13,9 +13,9 @@ RUN set -eux; \
     build-essential cmake wget autoconf pkg-config \
     libpcap0.8 libpcap0.8-dev libpcre3 libpcre3-dev \
     luajit libluajit-5.1-dev check hwloc libhwloc-dev \
-    libssl1.1 libssl-dev zlib1g zlib1g-dev flex bison \
+    libssl3 libssl-dev zlib1g zlib1g-dev flex bison \
     lzma lzma-dev uuid git \
-    uuid-dev libunwind8 libunwind-dev libsafec-3.5-3 \
+    uuid-dev libunwind8 libunwind-dev libsafec3 \
     libsafec-dev libjemalloc-dev libjemalloc2 libtool \
     libfl-dev ca-certificates openssl \
     libgoogle-perftools-dev libgoogle-perftools4 libtcmalloc-minimal4 ; \
@@ -68,7 +68,7 @@ RUN set -eux; \
     tar -xvzf /tmp/snort.tar.gz --strip-components=1 -C /tmp/snort_src ; \
     (\
     cd /tmp/snort_src && \
-    ./configure_cmake.sh --prefix=/usr/local/snort --enable-tcmalloc --enable-jemalloc && \
+    ./configure_cmake.sh --prefix=/usr/local/snort --enable-jemalloc && \
     cd /tmp/snort_src/build && \
     make -j$(nproc) && \
     make install \
@@ -89,7 +89,7 @@ RUN set -eux; \
     apt-get update ; \
     apt-get install -y --no-install-recommends \
     hwloc luajit libpcap0.8 libunwind8 \
-    libjemalloc2 libgoogle-perftools4 libsafec-3.5-3 \
+    libjemalloc2 libgoogle-perftools4 libsafec3 \
     python3 python3-requests ; \
     apt-get clean ; \
     rm -rf /var/lib/apt/lists/* ; \
@@ -116,5 +116,7 @@ RUN set -eux; \
     touch /usr/local/etc/lists/default.blocklist ; \
     # download community rules
     pulledpork.py -c /usr/local/etc/pulledpork/pulledpork.conf
+    
+USER snort
 
 CMD [ "/usr/local/bin/snort", "-T", "-c", "/usr/local/etc/snort/snort.lua" ]
