@@ -14,6 +14,10 @@ variable "libdnet_version" {
   default = "1.18.0"
 }
 
+variable "hyperscan_version" {
+  default = "5.4.2"
+}
+
 variable "image_repo_host" {
     default = "mfscy"
 }
@@ -77,6 +81,7 @@ target "snort3-default" {
     SNORT_VERSION = snort_version
     LIBDAQ_VERSION = libdaq_version
     LIBDNET_VERSION = libdnet_version
+    HYPERSCAN_VERSION = hyperscan_version
   }
 }
 
