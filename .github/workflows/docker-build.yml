@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - workflow  # Trigger workflow on push to the main branch
+      - v2.0  # Trigger workflow on push to the main branch
   pull_request:
     branches:
       - v2.0  # Optional: Run the workflow on PRs target
