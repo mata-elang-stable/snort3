@@ -26,7 +26,7 @@ RUN set -eux; \
     ( \
     cd /tmp/hyperscan_src/build && \
     cmake /tmp/hyperscan_src && \
-    make && \
+    make -j$(nproc) && \
     make install \
     ) ; \
     fi
@@ -40,7 +40,7 @@ RUN set -eux; \
     cd /tmp/libdaq_src && \
     ./bootstrap && \
     ./configure && \
-    make && \
+    make -j$(nproc) && \
     make install \
     ) ;
 
@@ -52,7 +52,7 @@ RUN set -eux; \
     (\
     cd /tmp/libdnet_src && \
     ./configure && \
-    make && \
+    make -j$(nproc) && \
     make install \
     ) ;
 
@@ -64,7 +64,7 @@ RUN set -eux; \
     ( \
     cd /tmp/libsafec_src && \
     ./configure && \
-    make && \
+    make -j$(nproc) && \
     make install \
     ) ;
 
@@ -76,7 +76,7 @@ RUN set -eux; \
     ( \
     cd /tmp/jemalloc_src && \
     ./configure && \
-    make && \
+    make -j$(nproc) && \
     make install \
     ) ;
 
@@ -89,7 +89,7 @@ RUN set -eux; \
     cd /tmp/snort_src && \
     ./configure_cmake.sh --prefix=/usr/local/snort --enable-jemalloc && \
     cd /tmp/snort_src/build && \
-    make && \
+    make -j$(nproc) && \
     make install \
     ) ;
 
