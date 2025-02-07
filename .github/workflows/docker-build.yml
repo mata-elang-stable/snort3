@@ -5,17 +5,17 @@ on:
     branches:
       - v2.0
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
     branches:
-      - v2.0  # Optional: Run the workflow on PRs target
+      - v2.0 # Optional: Run the workflow on PRs target
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push-review:
+  build-and-push:
     runs-on: image-builder
 
     permissions:
@@ -34,7 +34,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
