@@ -46,12 +46,7 @@ group "default" {
   ]
 }
 
-target "virtual-default" {
-  context = "."
-  labels = {
-    "net.mataelang.image.source" = "https://github.com/mata-elang-stable",
-  }
-}
+target "docker-metadata-action" {}
 
 target "virtual-platforms" {
   platforms = [
@@ -74,7 +69,7 @@ target "virtual-alpine" {
 
 target "snort3-default" {
   inherits = [
-    "virtual-default",
+    "docker-metadata-action",
     "virtual-platforms",
   ]
   args = {
