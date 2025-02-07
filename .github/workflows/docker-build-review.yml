@@ -6,7 +6,7 @@ on:
       - v2.0  # Optional: Run the workflow on PRs target
 
 jobs:
-  build-and-push:
+  build-and-push-review:
     runs-on: image-builder
 
     permissions:

@@ -6,7 +6,7 @@ on:
       - v2.0  # Trigger workflow on push to the main branch
 
 jobs:
-  build-and-push:
+  build-and-push-main:
     runs-on: image-builder
 
     permissions:
