@@ -30,5 +30,5 @@ jobs:
           context: .
           file: ./dockerfiles/debian.dockerfile
           platforms: linux/arm64,linux/amd64
-          push: false
+          push: true
           tags: ghcr.io/${{ github.repository }}:2-review-${{ github.event.number }}
