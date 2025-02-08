@@ -10,14 +10,12 @@ ARG LIBDNET_VERSION=1.18.0
 RUN set -eux; \
     apk add --no-cache \
     build-base cmake bash autoconf automake pkgconf \
-    libpcap libpcap-dev pcre pcre-dev \
+    libpcap libpcap-dev pcre pcre-dev gcc g++ libc-dev \
     luajit luajit-dev check check-dev hwloc hwloc-dev \
     openssl-dev libssl3 openssl zlib zlib-dev flex flex-dev bison \
     xz xz-dev libuuid linux-headers git \
     libunwind libunwind-dev libtool numactl-dev \
     ca-certificates util-linux-dev libtirpc-dev boost boost-dev ragel
-
-ENV QEMU_STRACE=1
 
 ADD https://github.com/intel/hyperscan/archive/refs/tags/v${HYPERSCAN_VERSION}.tar.gz /tmp/hyperscan.tar.gz
 

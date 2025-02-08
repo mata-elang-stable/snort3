@@ -22,8 +22,6 @@ RUN set -eux; \
     apt-get clean ; \
     rm -rf /var/lib/apt/lists/*
 
-ENV QEMU_STRACE=1
-
 ADD https://github.com/intel/hyperscan/archive/refs/tags/v${HYPERSCAN_VERSION}.tar.gz /tmp/hyperscan.tar.gz
 
 RUN set -eux; \
