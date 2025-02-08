@@ -14,6 +14,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   BUILDER_NAME: mybuilder
+  BUILD_PLATFORMS_TARGET: linux/amd64
 
 permissions:
   contents: read
@@ -64,7 +65,7 @@ jobs:
         with:
           context: .
           file: ./dockerfiles/debian.dockerfile
-          platforms: linux/arm64,linux/amd64
+          platforms: ${{ env.BUILD_PLATFORMS_TARGET }}
           push: ${{ github.event_name != 'pull_request' }}
           builder: ${{ env.BUILDER_NAME }}
           tags: ${{ steps.meta.outputs.tags }}
@@ -118,7 +119,7 @@ jobs:
         with:
           context: .
           file: ./dockerfiles/alpine.dockerfile
-          platforms: linux/arm64,linux/amd64
+          platforms: ${{ env.BUILD_PLATFORMS_TARGET }}
           push: ${{ github.event_name != 'pull_request' }}
           builder: ${{ env.BUILDER_NAME }}
           tags: ${{ steps.meta.outputs.tags }}
