@@ -38,6 +38,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
+        if: github.event_name != 'pull_request'
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
@@ -55,6 +56,7 @@ jobs:
       #   uses: docker/setup-buildx-action@v3
 
       - name: Expose GitHub Runtime
+        if: github.event_name != 'pull_request'
         uses: crazy-max/ghaction-github-runtime@v3
 
       - name: Build
@@ -63,7 +65,7 @@ jobs:
           context: .
           file: ./dockerfiles/debian.dockerfile
           platforms: linux/arm64,linux/amd64
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           builder: ${{ env.BUILDER_NAME }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -71,6 +73,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Generate artifact attestation
+        if: github.event_name != 'pull_request'
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
@@ -93,6 +96,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
+        if: github.event_name != 'pull_request'
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
@@ -115,7 +119,7 @@ jobs:
           context: .
           file: ./dockerfiles/alpine.dockerfile
           platforms: linux/arm64,linux/amd64
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           builder: ${{ env.BUILDER_NAME }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -123,6 +127,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Generate artifact attestation
+        if: github.event_name != 'pull_request'
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
