@@ -10,7 +10,7 @@ ARG LIBDNET_VERSION=1.18.0
 RUN set -eux; \
     apk add --no-cache \
     build-base cmake bash autoconf automake pkgconf \
-    libpcap libpcap-dev pcre pcre-dev \
+    libpcap libpcap-dev pcre pcre-dev gcc g++ libc-dev \
     luajit luajit-dev check check-dev hwloc hwloc-dev \
     openssl-dev libssl3 openssl zlib zlib-dev flex flex-dev bison \
     xz xz-dev libuuid linux-headers git \
@@ -104,13 +104,6 @@ RUN set -eux; \
 
 FROM alpine:${ALPINE_VERSION}
 
-COPY --link --from=builder /usr/local/lib/ /usr/local/lib/
-COPY --link --from=builder /usr/local/include/ /usr/local/include/
-COPY --link --from=builder /usr/local/share/doc/ /usr/local/share/doc/
-COPY --link --from=builder /usr/local/snort/ /usr/local/
-COPY --link --from=builder /usr/local/bin/pulledpork/ /usr/local/bin/
-COPY --link --from=builder /usr/local/etc/pulledpork/ /usr/local/etc/pulledpork/
-
 RUN set -eux; \
     apk add --no-cache \
     libpcap pcre numactl \
@@ -119,7 +112,16 @@ RUN set -eux; \
     xz libuuid libtirpc \
     libunwind libtool \
     ca-certificates boost ragel \
-    python3 py3-requests ; \
+    python3 py3-requests
+
+COPY --link --from=builder /usr/local/lib/ /usr/local/lib/
+COPY --link --from=builder /usr/local/include/ /usr/local/include/
+COPY --link --from=builder /usr/local/share/doc/ /usr/local/share/doc/
+COPY --link --from=builder /usr/local/snort/ /usr/local/
+COPY --link --from=builder /usr/local/bin/pulledpork/ /usr/local/bin/
+COPY --link --from=builder /usr/local/etc/pulledpork/ /usr/local/etc/pulledpork/
+
+RUN set -eux; \
     ldconfig /usr/local/lib ; \
     chmod +x /usr/local/bin/pulledpork.py ; \
     # setup user \

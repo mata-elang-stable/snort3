@@ -85,17 +85,19 @@ RUN set -eux; \
 
 FROM debian:${DEBIAN_VERSION}
 
+RUN set -eux; \
+    apt-get update && apt-get install -y --no-install-recommends \
+    hwloc luajit libpcap0.8 libunwind8 \
+    libjemalloc2 libgoogle-perftools4 libsafec3 \
+    python3 python3-requests libpcre3 libnuma1 ; \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 COPY --link --from=builder /usr/local/lib/ /usr/local/lib/
 COPY --link --from=builder /usr/local/snort/ /usr/local/
 COPY --link --from=builder /usr/local/bin/pulledpork/ /usr/local/bin/
 COPY --link --from=builder /usr/local/etc/pulledpork/ /usr/local/etc/pulledpork/
 
 RUN set -eux; \
-    apt-get update && apt-get install -y --no-install-recommends \
-    hwloc luajit libpcap0.8 libunwind8 \
-    libjemalloc2 libgoogle-perftools4 libsafec3 \
-    python3 python3-requests libpcre3 libnuma1 ; \
-    apt-get clean && rm -rf /var/lib/apt/lists/* ; \
     ldconfig /usr/local/lib ; \
     chmod +x /usr/local/bin/pulledpork.py ; \
     # setup user
