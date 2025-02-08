@@ -9,6 +9,9 @@ jobs:
   cleanup:
     runs-on: image-builder
     steps:
+      - name: Expose GitHub Runtime
+        uses: crazy-max/ghaction-github-runtime@v3
+
       - name: Cleanup
         run: |
           echo "Fetching list of cache key"
