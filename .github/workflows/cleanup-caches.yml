@@ -7,7 +7,7 @@ on:
 
 jobs:
   cleanup:
-    runs-on: image-builder
+    runs-on: ubuntu-latest
     steps:
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v3
