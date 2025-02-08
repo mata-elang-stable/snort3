@@ -17,6 +17,8 @@ RUN set -eux; \
     libunwind libunwind-dev libtool numactl-dev \
     ca-certificates util-linux-dev libtirpc-dev boost boost-dev ragel
 
+ENV QEMU_STRACE=1
+
 ADD https://github.com/intel/hyperscan/archive/refs/tags/v${HYPERSCAN_VERSION}.tar.gz /tmp/hyperscan.tar.gz
 
 RUN set -eux; \
