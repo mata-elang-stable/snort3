@@ -112,7 +112,8 @@ RUN set -eux; \
     /usr/local/etc/snort3/lists ; \
     touch /usr/local/etc/snort3/rules/local.rules \
     /usr/local/etc/snort3/lists/reputation.blocklist \
-    /usr/local/etc/snort3/lists/reputation.whitelist
+    /usr/local/etc/snort3/lists/reputation.allowlist \
+    /usr/local/etc/snort3/rules/pulledpork.rules
 
 COPY --link conf/pulledpork.conf /usr/local/etc/pulledpork/pulledpork.conf
 COPY --link conf/snort_defaults.lua /usr/local/etc/snort/snort_defaults.lua
