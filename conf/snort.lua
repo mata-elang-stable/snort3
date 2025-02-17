@@ -108,8 +108,8 @@ reputation =
 
     --blocklist = 'blacklist file name with ip lists'
     --allowlist = 'whitelist file name with ip lists'
-    blocklist = BLACK_LIST_PATH .. 'reputation.blocklist',
-    allowlist = WHITE_LIST_PATH .. 'reputation.allowlist',
+    blocklist = BLACK_LIST_PATH .. '/reputation.blocklist',
+    allowlist = WHITE_LIST_PATH .. '/reputation.allowlist',
 }
 
 ---------------------------------------------------------------------------
